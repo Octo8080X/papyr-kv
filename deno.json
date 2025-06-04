@@ -4,13 +4,19 @@
   "exports": "./mod.ts",
   "tasks": {
     "dev": "deno test --watch",
-    "pubsub:pub": "deno run --allow-read --allow-write --allow-net ./example/publisher.ts",
-    "pubsub:sub": "deno run --allow-read --allow-write --allow-net ./example/subscriber.ts"
+    "pubsub:pub": "deno run -RWNE --env=.env.sample ./example/publisher.ts",
+    "pubsub:sub": "deno run -RWNE --env=.env.sample ./example/subscriber.ts",
+    "pubsub:sub2": "deno run -RWNE --env=.env.sample ./example/subscriber.ts",
+    "pubsub:log": "deno run -RWNE --env=.env.sample ./example/log.ts",
+    "pubsub:remove-log": "deno run -RWNE --env=.env.sample ./example/remove_log.ts",
+    "kv:self-host": "docker run -it --init -p 4512:4512 -v ./data:/data ghcr.io/denoland/denokv --sqlite-path /data/denokv.sqlite serve --access-token 123456789999"
   },
   "license": "MIT",
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
-    "@std/async": "jsr:@std/async@^1.0.13"
+    "@std/async": "jsr:@std/async@^1.0.13",
+    "@std/csv": "jsr:@std/csv@^1.0.6",
+    "@std/ulid": "jsr:@std/ulid@^1.0.0"
   },
   "unstable": ["kv"]
 }
